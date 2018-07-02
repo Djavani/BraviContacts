@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.djavanigomes.domain.Contact;
-import br.com.djavanigomes.domain.User;
 import br.com.djavanigomes.dto.ContactDTO;
-import br.com.djavanigomes.dto.UserDTO;
 import br.com.djavanigomes.repository.ContactRepository;
 import br.com.djavanigomes.services.exception.ObjectNotFoundException;
 
