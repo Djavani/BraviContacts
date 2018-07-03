@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.djavanigomes.domain.User;
 import br.com.djavanigomes.dto.UserDTO;
 import br.com.djavanigomes.services.UserService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value="/users")
@@ -27,6 +28,7 @@ public class UserResource {
 	@Autowired
 	private UserService userService;
 	
+	@ApiOperation(value="Busca todos os usuários.")
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll() {		
 		List<User> list = userService.findAll();
@@ -34,12 +36,14 @@ public class UserResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@ApiOperation(value="Busca um usuário por id.")
 	@GetMapping(value="/{id}")
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 		User user = userService.findById(id);
 		return ResponseEntity.ok().body(new UserDTO(user));
 	}
 	
+	@ApiOperation(value="Grava um novo usuário.")
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody UserDTO userDto) {
 		User user = userService.fromDTO(userDto);
@@ -48,12 +52,14 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiOperation(value="Deleta um usuário passando seu ID por parâmetro.")
 	@DeleteMapping(value="/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		userService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(value="Edita um usuário passando seu ID por parâmetro.")
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Void> update(@RequestBody UserDTO userDto, @PathVariable String id) {
 		User user = userService.fromDTO(userDto);
@@ -62,6 +68,7 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(value="Retorna todos os contatos de um usuário passando seu ID por parâmetro.")
 	@GetMapping(value="/{id}/contacts")
 	public ResponseEntity<UserDTO> findcontacts(@PathVariable String id) {
 		User user = userService.findById(id);
